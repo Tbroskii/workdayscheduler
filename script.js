@@ -32,22 +32,21 @@ timeForm.on('click', '.saveBtn', handleSaveText);
 //this function is used to handle any click events that target any save button
 function handleSaveText(event) {
 
-  var btnClicked = $(event.target);
-  var timeTextObject = JSON.parse(localStorage.getItem("timeText"));
-  var parentDiv = btnClicked.parent('div');
-  console.log(parentDiv.children('textarea').val());
-  var parentID = parentDiv.attr('id');
-  var hour = parseInt(parentID.substring(5, parentID.length));
+  var btnClicked = $(event.target);//this gets the div for the button that was clicked
+  var timeTextObject = JSON.parse(localStorage.getItem("timeText"));//parse out current localstorage back into array with objects
+  var parentDiv = btnClicked.parent('div'); //this gets to the parent div from the button clicked
+  var parentID = parentDiv.attr('id');//this is getting id of div
+  var hour = parseInt(parentID.substring(5, parentID.length));//this is getting the hour of day by pulling a substring
 
-  for (var i = 0; i < timeTextObject.length; i++)
+  for (var i = 0; i < timeTextObject.length; i++) //this loops through until the correct hour is found withing the array
   {
-    if (timeTextObject[i].hourID === hour)
+    if (timeTextObject[i].hourID === hour)//once we have found the matching hour id to the hour we set the text of usertext to whatever is within the text area
     {
       timeTextObject[i].userText = parentDiv.children('textarea').val();
     }
   }
 
-  localStorage.setItem('timeText', JSON.stringify(timeTextObject));
+  localStorage.setItem('timeText', JSON.stringify(timeTextObject));//put updated array back into string and store into local storage
 }
 
 
@@ -63,23 +62,23 @@ function handleSaveText(event) {
 
 //this function is used to reload any saved data after the page is left or it has been reloaded
 function getSavedData(){
-  var loadSaves = JSON.parse(localStorage.getItem('timeText'));
-  var hourIterator = 9;
+  var loadSaves = JSON.parse(localStorage.getItem('timeText'));//get array from local storage string
+  var hourIterator = 9; //get first hour of work day
 
-  for (var i = 0; i < loadSaves.length; i++)
+  for (var i = 0; i < loadSaves.length; i++)//this loop is meant to go through and load all of the saved usertext in the array into the correct hour
   {
-    var hourBlock = `hour-${hourIterator}`;
-    hourIterator++;
-    if (hourIterator === 13)
+    var hourBlock = `hour-${hourIterator}`;// use template literal to allow for an iterable id
+    hourIterator++; //iterate hour
+    if (hourIterator === 13) //once hour hits 13 reset back down to one
     {
       hourIterator = 1;
     }
-  var hourDivs = $("#" + hourBlock);
-  hourDivs.children('textarea').val(loadSaves[i].userText);
+  var hourDivs = $("#" + hourBlock); //use iterated hour id to get each hour block
+  hourDivs.children('textarea').val(loadSaves[i].userText); //put usertext into text area
   }
 }
 
-getSavedData();
+getSavedData();//call once whenever page is reloaded
   
   // TODO: Add code to display the current date in the header of the page.
 });
