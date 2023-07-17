@@ -27,6 +27,10 @@ function handleSaveText(event) {
   var timeTextObject = JSON.parse(localStorage.getItem("timeText"));//parse out current localstorage back into array with objects
   var parentDiv = btnClicked.parent('div'); //this gets to the parent div from the button clicked
   var parentID = parentDiv.attr('id');//this is getting id of div
+  if(parentID === undefined)
+  {
+    parentID = parentDiv.attr('id');
+  }
   var hour = parseInt(parentID.substring(5, parentID.length));//this is getting the hour of day by pulling a substring
 
   for (var i = 0; i < timeTextObject.length; i++) //this loops through until the correct hour is found withing the array
