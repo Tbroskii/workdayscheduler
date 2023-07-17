@@ -56,12 +56,12 @@ function handleSaveText(event) {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
 
-$(".time-block").each(function() {
+$(".time-block").each(function() { //for each element with class .time-block perform this function
 
-  var timeBlockID = $(this).attr("id");
-  var hour = parseInt(timeBlockID.substring(5, timeBlockID.length));
-  var currentHour = dayjs().hour();
-
+  var timeBlockID = $(this).attr("id");//get the id of the current div
+  var hour = parseInt(timeBlockID.substring(5, timeBlockID.length)); //get the time from the div
+  var currentHour = dayjs().hour();//get the current time
+  //convert times to military time so the can be compared
   if (hour === 1)
   {
     hour = 13
@@ -83,9 +83,9 @@ $(".time-block").each(function() {
     hour = 17;
   }
 
-  var hourDayObj = dayjs().hour(hour);
+  var hourDayObj = dayjs().hour(hour);//convert the hour into a days object
 
-  if (dayjs().isAfter(hourDayObj, 'h'))
+  if (dayjs().isAfter(hourDayObj, 'h'))//set class depending on time of day
   {
     $(this).removeClass("present future").addClass("past")
   }
