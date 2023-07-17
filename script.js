@@ -23,7 +23,7 @@ $(function () {
       {userText:"", hourID: 5}
     ]
 
-   localStorage.setItem("timeText", JSON.stringify(dateTextObject));
+   localStorage.setItem("timeText", JSON.stringify(dateTextObject));//make array a string to store the data in local storage
   }
 
 var timeForm = $('.time-block');
@@ -127,4 +127,30 @@ function getSavedData(){
 getSavedData();//call once whenever page is reloaded
   
   // TODO: Add code to display the current date in the header of the page.
+  function getCurrentDay(){
+    var currentDay = dayjs().format('dddd, MMMM DD') //format current day
+    
+    //add correct end depending on day
+    if (dayjs().date() === 1)
+    {
+      currentDay = currentDay + "st";
+    }
+    else if (dayjs().date() === 2)
+    {
+      currentDay = currentDay + "nd";
+    }
+    else if (dayjs().date() === 3)
+    {
+      currentDay = currentDay + "rd";
+    }
+    else
+    {
+      currentDay = currentDay + "th";
+    }
+
+    //put formattted date into p
+    $("#current-day").text(currentDay);
+  }
+
+  getCurrentDay();
 });
