@@ -18,8 +18,6 @@ $(function () {
   }
 
 var timeForm = $('.time-block');
-
-
 timeForm.on('click', '.saveBtn', handleSaveText);
 
 //this function is used to handle any click events that target any save button
@@ -27,7 +25,7 @@ function handleSaveText(event) {
   var timeTextObject = JSON.parse(localStorage.getItem("timeText"));//parse out current localstorage back into array with objects
   var btnClicked = $(event.target);//this gets the div for the button that was clicked
 
-  if (btnClicked.attr('class') === 'fas fa-save')// if the icon is hit instead of the rest of the button it will go up to layers
+  if (btnClicked.attr('class') === 'fas fa-save')// if the icon is hit instead of the rest of the button it will go up two layers
   {
     var parentDiv = btnClicked.parent('button').parent('div');
   } 
